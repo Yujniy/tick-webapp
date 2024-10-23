@@ -3,8 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
     tg.expand(); // Раскрываем на весь экран
 
-    // Получаем имя пользователя из Telegram или используем заглушку
-    const playerName = tg.initDataUnsafe?.user?.first_name || "Гость";
+    // Получаем параметры из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('user_id');
+    const username = urlParams.get('username');
+    const firstName = urlParams.get('first_name');
+    
+    // Используем переданное имя или данные из WebApp, или заглушку
+    const playerName = firstName || tg.initDataUnsafe?.user?.first_name || "Гость";
     
     const board = document.getElementById('board');
     
